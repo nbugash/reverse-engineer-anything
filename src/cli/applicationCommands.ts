@@ -76,6 +76,7 @@ export const registerApplicationCommands = (
   });
   registerObligationLedgerCommand(cli, logger);
   registerCoverageCommand(cli, logger);
+  registerRecoverArtifactSpecificationCommand(cli, logger);
   registerJsonCommand({
     cli,
     logger,
@@ -149,6 +150,24 @@ const registerCoverageCommand = (cli: CliInstance, logger: Logger): void =>
       const { evaluateReconstructionCoverage } =
         await import("../application/ReconstructionCoverageService.js");
       return evaluateReconstructionCoverage(input);
+    },
+  });
+
+const registerRecoverArtifactSpecificationCommand = (
+  cli: CliInstance,
+  logger: Logger,
+): void =>
+  registerJsonCommand({
+    cli,
+    logger,
+    name: CLI_COMMANDS.recoverArtifactSpecification,
+    description:
+      "Recover an evidence-graded artifact specification from an authenticated Evidence bundle",
+    inputSchema: z.unknown(),
+    workflow: async (input) => {
+      const { recoverArtifactSpecificationEvidence } =
+        await import("../application/RecoverArtifactSpecificationService.js");
+      return recoverArtifactSpecificationEvidence(input);
     },
   });
 

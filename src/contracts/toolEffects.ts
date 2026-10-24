@@ -693,6 +693,7 @@ export const TOOL_EFFECTS: Readonly<Record<string, ToolEffects>> = {
   compare_javascript_export_shapes: evidence,
   build_reconstruction_obligation_ledger: evidence,
   evaluate_reconstruction_coverage: effects(),
+  recover_artifact_specification: effects(),
   project_android_application_graph: evidence,
   project_apple_application_graph: evidence,
   project_harmony_application_graph: evidence,

@@ -8,6 +8,7 @@ import { registerCompareJavaScriptExportShapesTool } from "./registerApplication
 import { registerCoverageTools } from "./registerApplicationTools/coverage.js";
 import { registerReconstructionObligationLedgerTool } from "./registerApplicationTools/obligationLedger.js";
 import { registerProjectMobileApplicationGraphTools } from "./registerApplicationTools/projectMobileApplicationGraph.js";
+import { registerRecoverArtifactSpecificationTool } from "./registerApplicationTools/recoverArtifactSpecification.js";
 import type { ApplicationToolRegistration } from "./registerApplicationTools/types.js";
 
 /** Register provider-neutral JavaScript application graph workflows. */
@@ -23,4 +24,5 @@ export const registerApplicationTools = (
   registerReconstructionObligationLedgerTool(server, options);
   registerCoverageTools(server, options);
   registerProjectMobileApplicationGraphTools(server, options);
+  registerRecoverArtifactSpecificationTool(server, options);
 };

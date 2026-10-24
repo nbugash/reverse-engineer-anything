@@ -25,6 +25,10 @@ import {
 import { androidApplicationProjectionResultSchema } from "../domain/android/androidApplication.js";
 import { appleApplicationProjectionResultSchema } from "../domain/apple/appleApplication.js";
 import { harmonyApplicationProjectionResultSchema } from "../domain/harmony/harmonyApplication.js";
+import {
+  artifactSpecificationSchema,
+  recoverArtifactSpecificationInputSchema,
+} from "../domain/specification/index.js";
 import type { ToolContract } from "./toolContractTypes.js";
 import { toolContractMetadata } from "./toolEffects.js";
 import { evidenceResultOf } from "./toolOutputSchemaPrimitives.js";
@@ -315,6 +319,32 @@ export const APPLICATION_TOOL_CONTRACTS = [
         title:
           "Project HAP inventory Evidence into a HarmonyOS application graph",
         input: HARMONY_APPLICATION_GRAPH_EXAMPLE,
+      },
+    ],
+  },
+  {
+    name: "recover_artifact_specification",
+    ...toolContractMetadata("recover_artifact_specification"),
+    description:
+      "Project an authenticated Evidence bundle into an evidence-graded artifact specification: claims grouped by dimension (structure, interface, behavior, dependencies), each with a provenance tier (observed, derived, inferred, or unknown) and Evidence references, plus an explicit coverage summary and unknowns. Reuses retained analysis Evidence and runs no new analysis. Pass evidence_bundle, target_family (or null for a not-yet-supported family), and optional dimensions to restrict the projection.",
+    kind: "application",
+    inputSchema: recoverArtifactSpecificationInputSchema,
+    outputSchema: evidenceResultOf(artifactSpecificationSchema),
+    examples: [
+      {
+        title: "Recover a specification from an inline Evidence bundle",
+        input: {
+          evidence_bundle: {
+            artifacts: [],
+            providers: [],
+            environments: [],
+            scenarios: [],
+            captures: [],
+            unknowns: [],
+            records: [],
+          },
+          target_family: "elf-static",
+        },
       },
     ],
   },
